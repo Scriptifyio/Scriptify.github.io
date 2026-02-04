@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ScriptForge | Premium Roblox Scripts & AI Assistant</title>
+    <title>Scriptify | Premium Roblox Scripts</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,11 +15,11 @@
         <div class="nav-container">
             <div class="logo">
                 <span class="logo-icon">⚡</span>
-                <span class="logo-text">ScriptForge</span>
+                <span class="logo-text">Scriptify</span>
             </div>
             <div class="nav-links">
                 <a href="#scripts">Scripts</a>
-                <a href="#ai-assistant">AI Assistant</a>
+                <a href="#contact">Contact</a>
                 <a href="#pricing">Pricing</a>
                 <button class="premium-btn" id="premiumBtn">Get Premium - $60</button>
             </div>
@@ -33,10 +33,10 @@
             <h1 class="hero-title">
                 <span class="glitch" data-text="PREMIUM ROBLOX SCRIPTS">PREMIUM ROBLOX SCRIPTS</span>
             </h1>
-            <p class="hero-subtitle">AI-Powered Game Development Assistant + Professional Script Library</p>
+            <p class="hero-subtitle">Professional Script Library + Expert Development Support</p>
             <div class="hero-cta">
                 <button class="cta-primary" onclick="scrollToScripts()">Browse Scripts</button>
-                <button class="cta-secondary" onclick="openChat()">Try AI Assistant</button>
+                <button class="cta-secondary" onclick="scrollToContact()">Contact Us</button>
             </div>
             <div class="hero-stats">
                 <div class="stat">
@@ -44,12 +44,12 @@
                     <div class="stat-label">Premium Scripts</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-number">AI</div>
-                    <div class="stat-label">Powered Assistant</div>
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Support</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-number">24/7</div>
-                    <div class="stat-label">Access</div>
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Quality</div>
                 </div>
             </div>
         </div>
@@ -61,9 +61,9 @@
             <h2 class="section-title">What You Get</h2>
             <div class="features-grid">
                 <div class="feature-card">
-                    <div class="feature-icon">🤖</div>
-                    <h3>AI Game Assistant</h3>
-                    <p>Get instant game ideas, mechanics suggestions, and development advice powered by Claude AI</p>
+                    <div class="feature-icon">💡</div>
+                    <h3>Expert Support</h3>
+                    <p>Get game ideas, development advice, and technical support from experienced developers</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">📜</div>
@@ -107,41 +107,38 @@
         </div>
     </section>
 
-    <!-- AI Assistant Section -->
-    <section class="ai-section" id="ai-assistant">
+    <!-- Contact Section -->
+    <section class="ai-section" id="contact">
         <div class="container">
-            <h2 class="section-title">AI Game Development Assistant</h2>
-            <p class="section-subtitle">Chat with our AI to get game ideas, script explanations, and development advice</p>
+            <h2 class="section-title">Get Game Ideas & Support</h2>
+            <p class="section-subtitle">Need help with game ideas or have questions? We're here to help!</p>
             
             <div class="ai-container">
-                <div class="chat-box" id="chatBox">
-                    <div class="chat-welcome">
-                        <div class="welcome-icon">🤖</div>
-                        <h3>Welcome to ScriptForge AI Assistant!</h3>
-                        <p>I can help you with:</p>
-                        <ul>
-                            <li>✨ Generating game ideas and concepts</li>
-                            <li>📝 Explaining available scripts</li>
-                            <li>💡 Suggesting game mechanics and features</li>
-                            <li>👑 <span class="premium-badge">PREMIUM</span> Custom script requests</li>
+                <div style="padding: 3rem; text-align: center;">
+                    <div class="welcome-icon" style="font-size: 4rem; margin-bottom: 1rem;">💬</div>
+                    <h3 style="color: var(--primary); margin-bottom: 1rem; font-family: 'Orbitron', sans-serif;">Contact Us</h3>
+                    
+                    <p style="color: var(--text-secondary); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                        Join our Discord community to get game ideas, ask questions about scripts, and connect with other developers!
+                    </p>
+                    
+                    <div style="margin-bottom: 2rem;">
+                        <h4 style="color: var(--primary); margin-bottom: 1rem;">What We Help With:</h4>
+                        <ul style="text-align: left; max-width: 500px; margin: 0 auto; list-style: none; color: var(--text-secondary);">
+                            <li style="padding: 0.5rem 0;">✨ Game ideas and concepts</li>
+                            <li style="padding: 0.5rem 0;">📝 Script explanations and demos</li>
+                            <li style="padding: 0.5rem 0;">💡 Game mechanics suggestions</li>
+                            <li style="padding: 0.5rem 0;">👑 <span class="premium-badge">PREMIUM</span> Custom script requests</li>
                         </ul>
-                        <p class="chat-tip">Start chatting below to get started!</p>
                     </div>
-                    <div class="messages" id="messages"></div>
-                </div>
-                
-                <div class="chat-input-container">
-                    <input 
-                        type="text" 
-                        id="chatInput" 
-                        class="chat-input" 
-                        placeholder="Ask me anything about Roblox game development..."
-                        onkeypress="handleKeyPress(event)"
-                    >
-                    <button class="send-btn" onclick="sendMessage()">
-                        <span>Send</span>
-                        <span class="send-icon">→</span>
+                    
+                    <button class="cta-primary" onclick="window.open('https://discord.gg/vfJ84frv63', '_blank')" style="padding: 1rem 2rem; font-size: 1.1rem; border: none; cursor: pointer;">
+                        Join Our Discord
                     </button>
+                    
+                    <p style="color: var(--text-secondary); margin-top: 1.5rem; font-size: 0.9rem;">
+                        Or email us at: <a href="mailto:jason.sablanii671@gmail.com" style="color: var(--primary); text-decoration: none;">jason.sablanii671@gmail.com</a>
+                    </p>
                 </div>
             </div>
         </div>
@@ -165,7 +162,7 @@
                         <p class="price-desc">Forever free</p>
                     </div>
                     <ul class="features-list">
-                        <li>✅ AI Game Ideas Generator</li>
+                        <li>✅ Discord Community Access</li>
                         <li>✅ Browse All Scripts</li>
                         <li>✅ Purchase Individual Scripts</li>
                         <li>✅ Script Previews</li>
@@ -240,24 +237,24 @@
                 <div class="footer-brand">
                     <div class="logo">
                         <span class="logo-icon">⚡</span>
-                        <span class="logo-text">ScriptForge</span>
+                        <span class="logo-text">Scriptify</span>
                     </div>
-                    <p>Professional Roblox Scripts & AI Development Assistant</p>
+                    <p>Professional Roblox Scripts & Development Support</p>
                 </div>
                 <div class="footer-links">
                     <h4>Quick Links</h4>
                     <a href="#scripts">Scripts</a>
-                    <a href="#ai-assistant">AI Assistant</a>
+                    <a href="#contact">Contact</a>
                     <a href="#pricing">Pricing</a>
                 </div>
                 <div class="footer-contact">
                     <h4>Support</h4>
                     <p>Questions? We're here to help!</p>
-                    <p>Contact via Discord webhook</p>
+                    <p>Join our Discord or email us</p>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 ScriptForge. All rights reserved.</p>
+                <p>&copy; 2024 Scriptify. All rights reserved.</p>
             </div>
         </div>
     </footer>
