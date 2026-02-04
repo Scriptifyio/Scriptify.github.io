@@ -10,18 +10,18 @@ const CONFIG = {
     SCRIPTS: [
         {
             id: 1,
-            title: 'Advanced Combat System',
+            title: 'CurrencyPetObbySystem',
             category: 'gameplay',
-            description: 'Complete combat system with combos, special moves, health/damage system, and animations. Perfect for action games.',
+            description: 'Complete Currency, Pet and Obby System.',
             price: 15,
             features: [
-                'Combo system with 10+ moves',
-                'Health and damage calculation',
-                'Hit detection and knockback',
-                'Animation integration',
-                'Customizable damage values'
+                'Pets',
+                'Saved currency',
+                'Gui',
+                'Models',
+                'Customizable UI'
             ],
-            downloadUrl: '#', // REPLACE WITH YOUR DOWNLOAD LINK!
+            downloadUrl: '#', // https://drive.google.com/file/d/1G9Xhpu325t11XTMgVkHEEFS2mDGI0b48/view?usp=sharing
             isPremium: false
         },
         {
