@@ -13,7 +13,7 @@ const CONFIG = {
             title: 'CurrencyPetObbySystem',
             category: 'gameplay',
             description: 'Complete Currency, Pet and Obby System.',
-            price: 15,
+            price: 20,
             features: [
                 'Pets',
                 'Saved currency',
@@ -26,50 +26,50 @@ const CONFIG = {
         },
         {
             id: 2,
-            title: 'Inventory & Item System',
+            title: 'SimpleK9System',
             category: 'systems',
-            description: 'Professional inventory system with drag-and-drop UI, item stacking, equipment slots, and save/load functionality.',
-            price: 20,
+            description: 'Professional K9system and save/load functionality.',
+            price: 15,
             features: [
-                'Drag-and-drop interface',
-                'Item stacking and sorting',
-                'Equipment slots system',
+                'Commands',
+                'Easy to use',
+                'Reliable K9 Model',
                 'Data persistence (saves)',
-                'Item stats and tooltips'
+                'Simple Version'
             ],
-            downloadUrl: '#', // REPLACE WITH YOUR DOWNLOAD LINK!
+            downloadUrl: 'https://drive.google.com/file/d/1KbunLxbOI6MsWHeY-eQz4FQ8Gk9sTNjB/view?usp=sharing', 
             isPremium: false
         },
         {
             id: 3,
-            title: 'Admin Command Panel',
+            title: 'OverheadSystemAdvance',
             category: 'ui',
-            description: 'Comprehensive admin panel with commands for moderation, player management, and game control. Includes permission levels.',
-            price: 12,
+            description: 'Advance Overhead UI with AFK assistance, ranks, names, teams, country flag, and much more. You can adjust everything to your liking as well and is super easy to set up.',
+            price: 17,
             features: [
-                '30+ admin commands',
-                'Permission level system',
-                'Player moderation tools',
-                'Teleportation commands',
-                'Game control features'
+                'AFK assistance',
+                'Country flag support',
+                'Different frames to fit your overheadUI',
+                'Easy to set up',
+                'Emblem assistance to fit your teams emblem'
             ],
-            downloadUrl: '#', // REPLACE WITH YOUR DOWNLOAD LINK!
+            downloadUrl: 'https://drive.google.com/file/d/1v8XCtLm4XUZnJDYV1QZiHLN4E9xILxK_/view?usp=sharing', 
             isPremium: false
         },
         {
             id: 4,
-            title: 'Particle Effects Library',
-            category: 'effects',
-            description: 'Collection of 20+ stunning particle effects including explosions, magic spells, environmental effects, and more.',
-            price: 18,
+            title: 'AITutorialLoadingScreen',
+            category: 'ui',
+            description: 'Loading screen with an AI explaining your game',
+            price: 8,
             features: [
-                '20+ unique effects',
-                'Customizable parameters',
-                'Optimized performance',
-                'Easy integration',
-                'Effect preview system'
+                'AI Loading Screen Instructed',
+                'Customizable Background and AI bot image',
+                'Easy to use',
+                'Mobile Friendly',
+                'Explain your game when players first join'
             ],
-            downloadUrl: '#', // REPLACE WITH YOUR DOWNLOAD LINK!
+            downloadUrl: 'https://drive.google.com/file/d/1sCNsxXwr3AccDXi9x_p5PIHJ409QYzxV/view?usp=sharing', 
             isPremium: false
         }
     ],
