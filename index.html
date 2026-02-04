@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ScriptForge | Premium Roblox Scripts & AI Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">⚡</span>
+                <span class="logo-text">ScriptForge</span>
+            </div>
+            <div class="nav-links">
+                <a href="#scripts">Scripts</a>
+                <a href="#ai-assistant">AI Assistant</a>
+                <a href="#pricing">Pricing</a>
+                <button class="premium-btn" id="premiumBtn">Get Premium - $60</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="glitch" data-text="PREMIUM ROBLOX SCRIPTS">PREMIUM ROBLOX SCRIPTS</span>
+            </h1>
+            <p class="hero-subtitle">AI-Powered Game Development Assistant + Professional Script Library</p>
+            <div class="hero-cta">
+                <button class="cta-primary" onclick="scrollToScripts()">Browse Scripts</button>
+                <button class="cta-secondary" onclick="openChat()">Try AI Assistant</button>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">Premium Scripts</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">AI</div>
+                    <div class="stat-label">Powered Assistant</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Access</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">What You Get</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI Game Assistant</h3>
+                    <p>Get instant game ideas, mechanics suggestions, and development advice powered by Claude AI</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📜</div>
+                    <h3>Professional Scripts</h3>
+                    <p>Production-ready Roblox scripts tested and optimized for performance</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Instant Delivery</h3>
+                    <p>Download scripts immediately after purchase, no waiting</p>
+                </div>
+                <div class="feature-card premium-feature">
+                    <div class="feature-icon">👑</div>
+                    <h3>Custom Requests</h3>
+                    <p class="premium-only">PREMIUM ONLY</p>
+                    <p>Request custom scripts tailored to your game's specific needs</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts Marketplace -->
+    <section class="scripts-section" id="scripts">
+        <div class="container">
+            <h2 class="section-title">Script Marketplace</h2>
+            <p class="section-subtitle">Browse our collection of professional Roblox scripts</p>
+            
+            <div class="filter-bar">
+                <select id="scriptFilter" class="script-dropdown">
+                    <option value="all">All Scripts</option>
+                    <option value="gameplay">Gameplay</option>
+                    <option value="ui">User Interface</option>
+                    <option value="systems">Game Systems</option>
+                    <option value="effects">Visual Effects</option>
+                </select>
+            </div>
+
+            <div class="scripts-grid" id="scriptsGrid">
+                <!-- Scripts will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Assistant Section -->
+    <section class="ai-section" id="ai-assistant">
+        <div class="container">
+            <h2 class="section-title">AI Game Development Assistant</h2>
+            <p class="section-subtitle">Chat with our AI to get game ideas, script explanations, and development advice</p>
+            
+            <div class="ai-container">
+                <div class="chat-box" id="chatBox">
+                    <div class="chat-welcome">
+                        <div class="welcome-icon">🤖</div>
+                        <h3>Welcome to ScriptForge AI Assistant!</h3>
+                        <p>I can help you with:</p>
+                        <ul>
+                            <li>✨ Generating game ideas and concepts</li>
+                            <li>📝 Explaining available scripts</li>
+                            <li>💡 Suggesting game mechanics and features</li>
+                            <li>👑 <span class="premium-badge">PREMIUM</span> Custom script requests</li>
+                        </ul>
+                        <p class="chat-tip">Start chatting below to get started!</p>
+                    </div>
+                    <div class="messages" id="messages"></div>
+                </div>
+                
+                <div class="chat-input-container">
+                    <input 
+                        type="text" 
+                        id="chatInput" 
+                        class="chat-input" 
+                        placeholder="Ask me anything about Roblox game development..."
+                        onkeypress="handleKeyPress(event)"
+                    >
+                    <button class="send-btn" onclick="sendMessage()">
+                        <span>Send</span>
+                        <span class="send-icon">→</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section" id="pricing">
+        <div class="container">
+            <h2 class="section-title">Choose Your Plan</h2>
+            <p class="section-subtitle">One-time payment. Lifetime access.</p>
+            
+            <div class="pricing-grid">
+                <!-- Free Tier -->
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <h3>Free Tier</h3>
+                        <div class="price">
+                            <span class="currency">$</span>
+                            <span class="amount">0</span>
+                        </div>
+                        <p class="price-desc">Forever free</p>
+                    </div>
+                    <ul class="features-list">
+                        <li>✅ AI Game Ideas Generator</li>
+                        <li>✅ Browse All Scripts</li>
+                        <li>✅ Purchase Individual Scripts</li>
+                        <li>✅ Script Previews</li>
+                        <li>❌ Access to All Scripts</li>
+                        <li>❌ Custom Script Requests</li>
+                        <li>❌ Future Script Updates</li>
+                    </ul>
+                    <button class="pricing-btn" onclick="alert('You are already on the free tier!')">Current Plan</button>
+                </div>
+
+                <!-- Premium Tier -->
+                <div class="pricing-card premium">
+                    <div class="premium-badge-top">BEST VALUE</div>
+                    <div class="pricing-header">
+                        <h3>Premium</h3>
+                        <div class="price">
+                            <span class="currency">$</span>
+                            <span class="amount">60</span>
+                        </div>
+                        <p class="price-desc">One-time payment</p>
+                    </div>
+                    <ul class="features-list">
+                        <li>✅ Everything in Free Tier</li>
+                        <li>✅ Access to ALL Scripts (4+ scripts)</li>
+                        <li>✅ Request Custom Scripts</li>
+                        <li>✅ All Future Scripts Included</li>
+                        <li>✅ Priority Support</li>
+                        <li>✅ Discord Notifications</li>
+                        <li>✅ Lifetime Updates</li>
+                    </ul>
+                    <button class="pricing-btn premium-btn" id="purchasePremiumBtn" onclick="purchasePremium()">Get Premium Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Script Modal -->
+    <div class="modal" id="scriptModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- Premium Modal -->
+    <div class="modal" id="premiumModal">
+        <div class="modal-content">
+            <span class="close" onclick="closePremiumModal()">&times;</span>
+            <div class="premium-modal-body">
+                <h2>Upgrade to Premium</h2>
+                <p>Get lifetime access to all scripts, custom requests, and future updates for a one-time payment of $60.</p>
+                
+                <div class="payment-options">
+                    <h3>Choose Payment Method:</h3>
+                    <button class="payment-btn stripe-btn" onclick="processStripePayment()">
+                        <span>Pay with Card</span>
+                    </button>
+                    <button class="payment-btn paypal-btn" onclick="processPayPalPayment()">
+                        <span>Pay with PayPal</span>
+                    </button>
+                </div>
+                
+                <p class="payment-note">Secure checkout powered by Stripe & PayPal</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <span class="logo-icon">⚡</span>
+                        <span class="logo-text">ScriptForge</span>
+                    </div>
+                    <p>Professional Roblox Scripts & AI Development Assistant</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <a href="#scripts">Scripts</a>
+                    <a href="#ai-assistant">AI Assistant</a>
+                    <a href="#pricing">Pricing</a>
+                </div>
+                <div class="footer-contact">
+                    <h4>Support</h4>
+                    <p>Questions? We're here to help!</p>
+                    <p>Contact via Discord webhook</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 ScriptForge. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>
