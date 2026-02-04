@@ -1,12 +1,11 @@
 // ========================================
-// SCRIPTFORGE - MAIN JAVASCRIPT
+// SCRIPTIFY - MAIN JAVASCRIPT (NO AI)
 // ========================================
 
 // ===== INITIALIZATION =====
 document.addEventListener('DOMContentLoaded', function() {
     loadScripts();
     updatePremiumUI();
-    initializeChat();
 });
 
 // ===== SCRIPT MARKETPLACE =====
@@ -114,202 +113,16 @@ function purchaseScript(scriptId) {
         downloadScript(script);
     } else {
         // Free users need to pay
-        alert(`To purchase "${script.title}" for $${script.price}, you'll need to set up Stripe/PayPal payment processing.\n\nFor now, this is a demo. In production, this would redirect to a payment page.`);
-        // TODO: Implement actual payment processing
-        // processPayment(script.price, script.id);
+        alert(`To purchase "${script.title}" for $${script.price}, please contact us:\n\nDiscord: Join our server\nEmail: Check contact section\n\nWe'll send you payment details and the script file!`);
     }
 }
 
 function downloadScript(script) {
-    if (script.downloadUrl === '#') {
-        alert(`Script ready for download!\n\nTitle: ${script.title}\n\nTo enable actual downloads, update the downloadUrl in config.js with a link to your file (Google Drive, Gumroad, etc.)`);
+    if (script.downloadUrl === '#' || !script.downloadUrl) {
+        alert(`Script ready for download!\n\nTitle: ${script.title}\n\nPlease contact us via Discord or email to receive your download link.`);
     } else {
         window.open(script.downloadUrl, '_blank');
         alert(`Thank you for your purchase! Your download should start automatically.`);
-    }
-}
-
-// ===== AI CHATBOT =====
-let conversationHistory = [];
-
-function initializeChat() {
-    const chatInput = document.getElementById('chatInput');
-    chatInput.focus();
-}
-
-function handleKeyPress(event) {
-    if (event.key === 'Enter') {
-        sendMessage();
-    }
-}
-
-async function sendMessage() {
-    const input = document.getElementById('chatInput');
-    const message = input.value.trim();
-    
-    if (!message) return;
-    
-    // Clear input
-    input.value = '';
-    
-    // Hide welcome message
-    const welcomeMsg = document.querySelector('.chat-welcome');
-    if (welcomeMsg) {
-        welcomeMsg.style.display = 'none';
-    }
-    
-    // Add user message to chat
-    addMessageToChat(message, 'user');
-    
-    // Check if API key is configured
-    if (CONFIG.CLAUDE_API_KEY === 'YOUR_CLAUDE_API_KEY_HERE') {
-        addMessageToChat('⚠️ API key not configured. Please add your Claude API key in config.js to enable AI chat functionality.\n\nGet your API key at: https://console.anthropic.com/', 'ai');
-        return;
-    }
-    
-    // Show typing indicator
-    const typingIndicator = addTypingIndicator();
-    
-    try {
-        // Check for custom script request (premium only)
-        if (message.toLowerCase().includes('request') && message.toLowerCase().includes('script')) {
-            if (CONFIG.isPremiumUser()) {
-                await sendDiscordNotification(message);
-                removeTypingIndicator(typingIndicator);
-                addMessageToChat('✅ Your custom script request has been sent to the developer! You\'ll receive a notification on Discord when it\'s ready. Typical turnaround time is 3-5 business days.', 'ai');
-                return;
-            } else {
-                removeTypingIndicator(typingIndicator);
-                addMessageToChat('🔒 Custom script requests are only available for Premium members ($60 one-time). Upgrade to Premium to request custom scripts tailored to your game!', 'ai');
-                return;
-            }
-        }
-        
-        // Get AI response
-        const response = await getClaudeResponse(message);
-        removeTypingIndicator(typingIndicator);
-        addMessageToChat(response, 'ai');
-        
-    } catch (error) {
-        console.error('Error:', error);
-        removeTypingIndicator(typingIndicator);
-        addMessageToChat('❌ Sorry, there was an error processing your request. Please check your API key and try again.\n\nError: ' + error.message, 'ai');
-    }
-}
-
-function addMessageToChat(text, type) {
-    const messagesContainer = document.getElementById('messages');
-    const messageDiv = document.createElement('div');
-    messageDiv.className = `message ${type}-message`;
-    messageDiv.textContent = text;
-    messagesContainer.appendChild(messageDiv);
-    
-    // Scroll to bottom
-    const chatBox = document.getElementById('chatBox');
-    chatBox.scrollTop = chatBox.scrollHeight;
-}
-
-function addTypingIndicator() {
-    const messagesContainer = document.getElementById('messages');
-    const indicator = document.createElement('div');
-    indicator.className = 'message ai-message typing-indicator';
-    indicator.innerHTML = '💭 Thinking...';
-    indicator.id = 'typing-indicator';
-    messagesContainer.appendChild(indicator);
-    
-    const chatBox = document.getElementById('chatBox');
-    chatBox.scrollTop = chatBox.scrollHeight;
-    
-    return indicator;
-}
-
-function removeTypingIndicator(indicator) {
-    if (indicator && indicator.parentNode) {
-        indicator.parentNode.removeChild(indicator);
-    }
-}
-
-async function getClaudeResponse(userMessage) {
-    const isPremium = CONFIG.isPremiumUser();
-    const systemPrompt = isPremium ? CONFIG.SYSTEM_PROMPTS.PREMIUM_USER : CONFIG.SYSTEM_PROMPTS.FREE_USER;
-    
-    // Add message to conversation history
-    conversationHistory.push({
-        role: 'user',
-        content: userMessage
-    });
-    
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'x-api-key': CONFIG.CLAUDE_API_KEY,
-            'anthropic-version': '2023-06-01'
-        },
-        body: JSON.stringify({
-            model: CONFIG.CLAUDE_MODEL,
-            max_tokens: 1024,
-            system: systemPrompt,
-            messages: conversationHistory
-        })
-    });
-    
-    if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.error?.message || 'API request failed');
-    }
-    
-    const data = await response.json();
-    const assistantMessage = data.content[0].text;
-    
-    // Add assistant response to history
-    conversationHistory.push({
-        role: 'assistant',
-        content: assistantMessage
-    });
-    
-    return assistantMessage;
-}
-
-async function sendDiscordNotification(requestMessage) {
-    if (CONFIG.DISCORD_WEBHOOK_URL === 'YOUR_DISCORD_WEBHOOK_URL_HERE') {
-        console.warn('Discord webhook not configured');
-        return;
-    }
-    
-    const embed = {
-        title: '🎮 New Premium Script Request',
-        description: requestMessage,
-        color: 0x00ff88, // Green color
-        fields: [
-            {
-                name: 'User Type',
-                value: 'Premium Member',
-                inline: true
-            },
-            {
-                name: 'Request Time',
-                value: new Date().toLocaleString(),
-                inline: true
-            }
-        ],
-        footer: {
-            text: 'ScriptForge Premium Request System'
-        }
-    };
-    
-    try {
-        await fetch(CONFIG.DISCORD_WEBHOOK_URL, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                embeds: [embed]
-            })
-        });
-    } catch (error) {
-        console.error('Failed to send Discord notification:', error);
     }
 }
 
@@ -341,27 +154,13 @@ function purchasePremium() {
 }
 
 function processStripePayment() {
-    // TODO: Implement actual Stripe payment
-    alert('Stripe payment processing not yet configured.\n\nTo set up:\n1. Create Stripe account at stripe.com\n2. Get publishable key\n3. Add to config.js\n4. Implement Stripe Checkout\n\nFor demo purposes, activating Premium now...');
-    
-    // Demo: Activate premium
-    CONFIG.setPremiumUser(true);
+    alert('To purchase Premium:\n\n1. Join our Discord server\n2. Contact an admin\n3. We\'ll send you payment details\n4. Get instant access to all scripts!\n\nPrice: $60 one-time payment');
     closePremiumModal();
-    updatePremiumUI();
-    alert('✅ Premium activated! You now have access to all scripts and can request custom scripts.');
-    location.reload();
 }
 
 function processPayPalPayment() {
-    // TODO: Implement actual PayPal payment
-    alert('PayPal payment processing not yet configured.\n\nTo set up:\n1. Create PayPal developer account\n2. Get client ID\n3. Add to config.js\n4. Implement PayPal SDK\n\nFor demo purposes, activating Premium now...');
-    
-    // Demo: Activate premium
-    CONFIG.setPremiumUser(true);
+    alert('To purchase Premium:\n\n1. Join our Discord server\n2. Contact an admin\n3. We\'ll send you PayPal payment details\n4. Get instant access to all scripts!\n\nPrice: $60 one-time payment');
     closePremiumModal();
-    updatePremiumUI();
-    alert('✅ Premium activated! You now have access to all scripts and can request custom scripts.');
-    location.reload();
 }
 
 // ===== MODAL CONTROLS =====
@@ -388,22 +187,18 @@ function scrollToScripts() {
     document.getElementById('scripts').scrollIntoView({ behavior: 'smooth' });
 }
 
-function openChat() {
-    document.getElementById('ai-assistant').scrollIntoView({ behavior: 'smooth' });
-    setTimeout(() => {
-        document.getElementById('chatInput').focus();
-    }, 500);
+function scrollToContact() {
+    document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
 }
 
 // ===== UTILITY FUNCTIONS =====
 function resetPremiumStatus() {
-    // For testing purposes - removes premium status
     localStorage.removeItem('isPremium');
     alert('Premium status reset. Reload the page to see changes.');
 }
 
 // Add console helper
-console.log('%c🚀 ScriptForge Loaded Successfully!', 'color: #00ff88; font-size: 16px; font-weight: bold;');
+console.log('%c🚀 Scriptify Loaded Successfully!', 'color: #00ff88; font-size: 16px; font-weight: bold;');
 console.log('%cDeveloper Tools:', 'color: #00d4ff; font-size: 14px;');
 console.log('- resetPremiumStatus() - Reset premium status for testing');
 console.log('- CONFIG - View all configuration settings');
