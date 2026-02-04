@@ -21,7 +21,7 @@ const CONFIG = {
                 'Models',
                 'Customizable UI'
             ],
-            downloadUrl: '#', // https://drive.google.com/file/d/1G9Xhpu325t11XTMgVkHEEFS2mDGI0b48/view?usp=sharing
+            downloadUrl: 'https://drive.google.com/file/d/1G9Xhpu325t11XTMgVkHEEFS2mDGI0b48/view?usp=sharing',
             isPremium: false
         },
         {
